@@ -1,0 +1,41 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="container">
+<br><br>
+	<div class="row">
+		<div class="col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+            <h3 class="text-center">LOGIN TO ACCOUNT</h3>
+            {% if success %}
+                <div class="alert alert-success">
+                    <strong>{{ success }}</strong>
+                </div>
+            {% endif %}
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+			<div class="well">
+                <form action="login" method="post">
+                    {% csrf_token %}
+                   <p><label for="id_username">Email:</label> <input autofocus="" id="id_username" maxlength="254" name="username" type="text" required="" class="form-control"></p>
+                   <p><label for="id_password">Password:</label> <input id="id_password" name="password" type="password" required="" class="form-control"></p>
+                    <button type="submit" class="btn btn-lg btn-block btn-success">Login</button><br>
+                    <a href="register">Create an account</a>
+                </form>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
